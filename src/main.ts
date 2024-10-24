@@ -31,7 +31,7 @@ const result = yargs(process.argv.slice(2))
     .demandOption(["layout"], "Please provide a layout")
     .parseSync()
 
-console.log("selected preset", result.layout)
+console.log(`Found selected preset "${result.layout}"`)
 const isWayland = process.env.XDG_SESSION_TYPE === "wayland"
 
 const selectedLayout = layouts.find((layout) => layout.name === result.layout);
@@ -72,6 +72,7 @@ function setOutputs(currentOutputs: Output[], layout: LayoutConfig) {
         }
     }
 
+    console.log("Executing command:")
     console.log([command, ...options].join(" "))
 
     childProcess.execSync([command, ...options].join(" "), { encoding: "utf-8", stdio: "inherit" })
@@ -87,7 +88,7 @@ function mapProperty(key: string, value: unknown): string {
     }
     if (key === "pos" && Position.isInstance(value)) {
         const { x, y } = value;
-        return `${key}.x,y`
+        return `position.${x},${y}`
     }
 
     return `${key}.${value}`

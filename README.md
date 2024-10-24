@@ -18,7 +18,7 @@ To build, the repo shall require:
 pnpm install
 ```
 
-Afterward, the layout can be configured via a Typescript file, e.g.:
+Afterward, the layout can be configured via a Typescript file `screenlayout.config.ts`, e.g.:
 
 ```
 import { LayoutConfig } from "./src/types";
